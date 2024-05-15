@@ -1,0 +1,10 @@
+#+TITLE: Animeunity Crawler
+* Come usarlo
+  #+begin_src sh
+    python3 crawler.py [URL]
+  #+end_src
+  Dove URL è la pagina di animeunity con la puntata che volete
+  scaricare. Scaricherà il video come =Downloaded.mp4=
+* Perchè?
+  C'è il pulsante per scaricare ma funziona *solo* senza adblocker e
+  non ho voglia di dover dodgare tutta la pubblicità ogni volta.
