@@ -1,3 +1,4 @@
+#!/bin/env python3
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.common.by import By
@@ -58,13 +59,13 @@ def get_frame_link_of(url, driver):
         # Close the browser
         return to_ret
 
-def download_from_frame(url):
+def download_from_frame(url, name):
     import requests
     r = requests.get(url)
     for line in r.text.splitlines():
         if "window.downloadUrl" in line:
             link = line.replace("window.downloadUrl = '", "").replace("'", "").strip()
-            urllib.request.urlretrieve(link, "Downloaded.mp4", show_progress)
+            urllib.request.urlretrieve(link, name, show_progress)
 
 # Main
 def main():
@@ -72,12 +73,13 @@ def main():
     if len(sys.argv) < 2:
         print("usage: ", sys.argv[0], " [URL]")
         exit(1)
-    url = sys.argv[-1]
+    url = sys.argv[1]
+    name = sys.argv[2]
     driver = init_driver()
     frame_link = get_frame_link_of(url, driver)
     deinit_driver(driver) 
     logging.info("Downloading...")
-    download_from_frame(frame_link)
+    download_from_frame(frame_link, name)
     logging.info("Done.")
 
 if __name__ == "__main__":
